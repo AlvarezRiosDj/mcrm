@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+from datetime import datetime, timedelta
+# from gqlauth.settings_type import GqlAuthSettings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&^%$p@@676rrn(4^_f3ov@5eflfr)(*z&ux6__esa!ss9^c7^m'
+# SECRET_KEY = 'django-insecure-&^%$p@@676rrn(4^_f3ov@5eflfr)(*z&ux6__esa!ss9^c7^m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'mcrm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,12 +75,12 @@ WSGI_APPLICATION = 'mcrm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -104,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Lima'
 
 USE_I18N = True
 
@@ -114,9 +117,62 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# STRAWBERRY_DJANGO = {
+#     "FIELD_DESCRIPTION_FROM_HELP_TEXT": True,
+#     "TYPE_DESCRIPTION_FROM_MODEL_DOCSTRING": True,
+#     "MAP_AUTO_ID_AS_GLOBAL_ID": True,
+# }
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# AUTHENTICATION_BACKENDS = [
+#     "django.contrib.auth.backends.ModelBackend",
+# ]
+
+# GQL_AUTH = GqlAuthSettings(
+#     LOGIN_REQUIRE_CAPTCHA = False,
+#     REGISTER_REQUIRE_CAPTCHA = False,
+#     JWT_LONG_RUNNING_REFRESH_TOKEN = True,
+#     JWT_EXPIRATION_DELTA = timedelta(days = 1),
+#     JWT_REFRESH_EXPIRATION_DELTA = timedelta(days = 7)
+#     # JWT_EXPIRATION_DELTA = timedelta(minutes = 2),
+#     # JWT_REFRESH_EXPIRATION_DELTA = timedelta(minutes = 5)
+# )
+
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3.S3Storage",        
+#         "OPTIONS": {
+#         #   ...your_options_here
+#         },
+#     },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+
+
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+if os.environ.get("CAPROVER") is None:
+    from .settings_dev import *
+    
+    # import socket
+
+    # hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    # INTERNAL_IPS = [ip[:-1] + '1' for ip in ips] + ['127.0.0.1']
+    
+else:
+    from .settings_caprover import *

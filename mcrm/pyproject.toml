@@ -6,14 +6,24 @@ authors = ["David Alvarez <alvarez.rios.dj@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.14"
 django = "^5.2.8"
 psycopg = {extras = ["binary"], version = "^3.2.12"}
-daphne = "^4.2.1"
-channels = "^4.3.1"
-django-storages = "^1.14.6"
-celery = "^5.5.3"
 strawberry-graphql-django = "^0.67.0"
+strawberry-django-auth = "^0.378.3"
+channels = "^4.3.1"
+boto3 = "^1.40.73"
+django-storages = "^1.14.6"
+reportlab = "^4.4.4"
+openpyxl = "^3.1.5"
+requests = "^2.32.5"
+celery = "^5.5.3"
+daphne = "^4.2.1"
+django-cors-headers = "^4.6.0"
+whitenoise = "^6.7.0"
+
+
+
 
 
 [build-system]

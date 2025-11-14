@@ -23,9 +23,6 @@ django-cors-headers = "^4.6.0"
 whitenoise = "^6.7.0"
 
 
-
-
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

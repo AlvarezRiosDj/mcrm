@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "mcrm"
+version = "0.1.0"
+description = ""
+authors = ["David Alvarez <alvarez.rios.dj@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.2.8"
+psycopg = {extras = ["binary"], version = "^3.2.12"}
+daphne = "^4.2.1"
+channels = "^4.3.1"
+django-storages = "^1.14.6"
+celery = "^5.5.3"
+strawberry-graphql-django = "^0.67.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

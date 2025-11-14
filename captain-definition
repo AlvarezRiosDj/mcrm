@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 2,
+  "dockerfileLines": [
+    "FROM python:3.12",
+    "RUN mkdir -p /usr/src/app",
+    "WORKDIR /usr/src/app",
+    "COPY ./mcrm/mcrm /usr/src/app",    
+    "RUN pip install -r requirements.txt",
+    "COPY ./utils/ /usr/src/utils",
+    "EXPOSE 80",
+    "CMD sh /usr/src/utils/run.sh"
+  ]
+}

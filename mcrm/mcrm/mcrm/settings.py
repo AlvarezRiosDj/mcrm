@@ -40,10 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'corsheaders',
+    
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',    
+    
     'django.middleware.security.SecurityMiddleware',
+    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -133,7 +141,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     "MAP_AUTO_ID_AS_GLOBAL_ID": True,
 # }
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # AUTHENTICATION_BACKENDS = [
 #     "django.contrib.auth.backends.ModelBackend",
@@ -149,22 +156,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     # JWT_REFRESH_EXPIRATION_DELTA = timedelta(minutes = 5)
 # )
 
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "storages.backends.s3.S3Storage",        
-#         "OPTIONS": {
-#         #   ...your_options_here
-#         },
-#     },
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",        
+        "OPTIONS": {
+        #   ...your_options_here
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
-# CORS_ALLOW_ALL_ORIGINS = True
-
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+CORS_ALLOW_ALL_ORIGINS = True
 
 if os.environ.get("CAPROVER") is None:
     from .settings_dev import *
